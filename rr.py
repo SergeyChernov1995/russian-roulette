@@ -382,6 +382,7 @@ def rodyti_klausima():
             if (j != who_asks_q) and (aux_list[j]["in_game"]):
                 who_answers_q = j
                 break
+        log.write('Задаёт: ' + aux_list[who_asks_q]['name'] + '\n')
         _4chooseemul = Timer(5, challengee, [who_answers_q])
         _4chooseemul.start()
     elif (round_number == 5):
@@ -649,7 +650,7 @@ def ar_kris_finale(h):
             if (occupied_by_winner == i):
                 canvas.delete(igroki_na_liukah[winner])
                 playermoney[winner]['text'] = str(aux_list[winner]['money'] + final_tree[0])
-                if (h == 3) and (occupied_by_host == i):
+                if (h == 3) and (occupied_by_host in dropzones_1234):
                     log.write('И ведущий, и финалист исчезли с площадки. \n Выигрыш: '+playermoney[winner]['text'])
                 else:
                     log.write(aux_list[winner]['name']+' покидает игру. \n Выигрыш: ' + playermoney[winner]['text'])
@@ -796,6 +797,11 @@ def check(*args):
                     log.write('Игрок забирает деньги. '+'\n.'+'Выигрыш: '+playermoney[winner]['text'])
                     log.close()
                     root.destroy()
+            else:
+                mb.showinfo('Поздравляем!', aux_list[winner]['name'] + ' выигрывает ' + playermoney[winner]['text'])
+                log.write('Выигрыш: ' + playermoney[winner]['text']+'\n')
+                log.close()
+                root.destroy()
         else:
             pole_qu['bg'] = '#ff0000'
             test_random = randint(3, 10)*3
